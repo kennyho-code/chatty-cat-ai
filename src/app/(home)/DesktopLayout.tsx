@@ -14,24 +14,25 @@ function DesktopSidbar() {
   return (
     <aside
       className={twMerge(
-        "bg-purple-50 h-screen w-[350px] flex flex-col justify-between p-4",
+        "bg-purple-50 min-h-screen w-[250px] flex-none flex flex-col justify-between p-4",
       )}
     >
-      <div className="flex flex-col gap-4">
-        <div>
-          <span>🐱 Chatty Cat AI</span>
+      <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col gap-4">
+          <div>
+            <span>🐱 Chatty Cat AI</span>
+          </div>
+          <div>
+            <button>⚡ Ongoing Prompt</button>
+          </div>
         </div>
-        <div>
-          <button>⚡ Ongoing Prompt</button>
+
+        <div className="flex flex-col gap-4 sticky bottom-0 pb-4">
+          <button className="border-2 rounded-md w-full inline-flex pl-4 py-2 bg-white shadow-sm">
+            <div>🪄 Start a Chat</div>
+          </button>
+          <CreateAccountCard />
         </div>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <button className="border-2 rounded-md w-full inline-flex pl-4 py-2 bg-white shadow-sm">
-          <div>🪄 Start a Chat</div>
-        </button>
-
-        <CreateAccountCard />
       </div>
     </aside>
   );

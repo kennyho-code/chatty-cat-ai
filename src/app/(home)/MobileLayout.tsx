@@ -36,7 +36,7 @@ function MobileSidebar({ hide, onClose, className }: SidebarProps) {
   return (
     <aside
       className={twMerge(
-        "fixed left-0 top-0 bg-purple-50 h-screen w-full",
+        "fixed left-0 top-0 bg-purple-50 min-h-screen w-full",
         "transition-transform duration-300 ease-in-out",
         hide && "-translate-x-full",
         className,
