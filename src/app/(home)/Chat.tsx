@@ -6,8 +6,16 @@ function Chat() {
     <div>
       Chat
       <Messages messages={chatData} />
+      <div className="flex">
+        <input className="w-full bg-gray-100" type="text" />
+        <button className="bg-gray-100 px-4 py-2 rounded-md">Submit</button>
+      </div>
     </div>
   );
+}
+
+function ChatInput() {
+  return <input type="text" />;
 }
 
 interface MessageProps {
@@ -25,7 +33,16 @@ function Messages({ messages }: MessageProps) {
             )}
             key={message.id}
           >
-            <span className="border-2">{message.content}</span>
+            <span
+              className={twMerge(
+                "border-2 p-4 rounded-md",
+                message.role === "assistant"
+                  ? "bg-white"
+                  : "bg-blue-500 border-blue-500 text-white",
+              )}
+            >
+              {message.content}
+            </span>
           </div>
         );
       })}

@@ -11,7 +11,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex justify-center h-screen lg:mt-[150px] p-4">
+    <div className="flex justify-center h-screen p-4">
       <div className="max-w-[710px] flex flex-col gap-24">
         {promptType === null ? (
           <DefaultChat setPromptType={handleSetPromptType} />
@@ -29,7 +29,7 @@ function DefaultChat({
   setPromptType: (promptType: string) => void;
 }) {
   return (
-    <>
+    <div className="mt-48">
       <h1 className="text-3xl font-semibold text-gray-600">
         <span className="text-black">Hey, I’m Chat AI.</span> Your AI assistant
         and companion for any occasion.
@@ -48,7 +48,7 @@ function DefaultChat({
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
