@@ -14,7 +14,7 @@ function DesktopSidbar() {
   return (
     <aside
       className={twMerge(
-        "bg-purple-50 min-h-screen w-[250px] flex-none flex flex-col justify-between p-4",
+        "bg-purple-50 h-screen w-[250px] flex-none flex flex-col justify-between p-4",
       )}
     >
       <div className="flex flex-col h-screen justify-between">

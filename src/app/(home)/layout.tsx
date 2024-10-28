@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ResponsiveLayout>
-          <div className="min-h-screen w-full bg-green-50">{children}</div>
+          <div className="h-screen  w-full overflow-hidden">{children}</div>
         </ResponsiveLayout>
       </body>
     </html>

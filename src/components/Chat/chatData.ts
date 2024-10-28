@@ -52,6 +52,19 @@ const chatData: ChatMessage[] = [
     content:
       "You're very welcome! I'm excited for you to try baking these cookies. Remember, practice makes perfect, so don't be discouraged if your first batch isn't exactly as you imagined. Baking is both an art and a science, and part of the fun is in experimenting and finding what works best for you. Enjoy the process, and happy baking! If you have any more questions in the future, feel free to ask. Good luck!",
   },
+
+  {
+    id: 10,
+    role: "user",
+    content:
+      "Thank you so much for all the information! I can't wait to try baking these cookies.",
+  },
+  {
+    id: 11,
+    role: "assistant",
+    content:
+      "You're very welcome! I'm excited for you to try baking these cookies. Remember, practice makes perfect, so don't be discouraged if your first batch isn't exactly as you imagined. Baking is both an art and a science, and part of the fun is in experimenting and finding what works best for you. Enjoy the process, and happy baking! If you have any more questions in the future, feel free to ask. Good luck!",
+  },
 ];
 
 export interface ChatMessage {
