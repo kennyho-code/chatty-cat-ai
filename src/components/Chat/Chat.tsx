@@ -92,6 +92,8 @@ function Chat({ defaultMessages, defaultPromptType, chatId }: ChatProps) {
 interface ChatInputProps {
   onSubmit: (inputVal: string) => void;
 }
+
+// There's a bug in mobile where it has to account for the header height so.... the chat input is not visible
 function ChatInput({ onSubmit }: ChatInputProps) {
   const [inputVal, setInputVal] = useState("");
 
