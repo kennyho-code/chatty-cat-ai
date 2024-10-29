@@ -34,41 +34,10 @@ const chatData: ChatMessage[] = [
     content:
       "These tips are fantastic! One last question: how long will the cookies stay fresh?",
   },
-  {
-    id: 7,
-    role: "assistant",
-    content:
-      "I'm glad you find the tips helpful! Regarding freshness:\n\n- Stored in an airtight container at room temperature, the cookies will stay fresh for about 3-5 days.\n- For longer storage, you can keep them in the refrigerator for up to 2 weeks.\n- You can also freeze the baked cookies for up to 3 months. Just thaw them at room temperature when you're ready to enjoy them.\n\nTo maintain freshness, make sure they're completely cool before storing, and you can add a slice of bread to the container to help keep them soft. Enjoy your cookies!",
-  },
-  {
-    id: 8,
-    role: "user",
-    content:
-      "Thank you so much for all the information! I can't wait to try baking these cookies.",
-  },
-  {
-    id: 9,
-    role: "assistant",
-    content:
-      "You're very welcome! I'm excited for you to try baking these cookies. Remember, practice makes perfect, so don't be discouraged if your first batch isn't exactly as you imagined. Baking is both an art and a science, and part of the fun is in experimenting and finding what works best for you. Enjoy the process, and happy baking! If you have any more questions in the future, feel free to ask. Good luck!",
-  },
-
-  {
-    id: 10,
-    role: "user",
-    content:
-      "Thank you so much for all the information! I can't wait to try baking these cookies.",
-  },
-  {
-    id: 11,
-    role: "assistant",
-    content:
-      "You're very welcome! I'm excited for you to try baking these cookies. Remember, practice makes perfect, so don't be discouraged if your first batch isn't exactly as you imagined. Baking is both an art and a science, and part of the fun is in experimenting and finding what works best for you. Enjoy the process, and happy baking! If you have any more questions in the future, feel free to ask. Good luck!",
-  },
 ];
 
 export interface ChatMessage {
-  id: number;
+  id: number | string;
   role: "assistant" | "user";
   content: string;
 }

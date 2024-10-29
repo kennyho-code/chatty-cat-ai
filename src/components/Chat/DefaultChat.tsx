@@ -4,24 +4,26 @@ function DefaultChat({
   setPromptType: (promptType: string) => void;
 }) {
   return (
-    <div className="mt-48 h-screen">
-      <h1 className="text-3xl font-semibold text-gray-600">
-        <span className="text-black">Hey, I’m Chat AI.</span> Your AI assistant
-        and companion for any occasion.
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        {promptCards.map((card) => (
-          <PromptCard
-            onClick={(e) => {
-              e.preventDefault();
-              setPromptType(card.promptType);
-            }}
-            key={card.title}
-            icon={card.icon}
-            title={card.title}
-            description={card.description}
-          />
-        ))}
+    <div className="mt-48 flex flex-1">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-3xl font-semibold text-gray-600">
+          <span className="text-black">Hey, I’m Chat AI.</span> Your AI
+          assistant and companion for any occasion.
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {promptCards.map((card) => (
+            <PromptCard
+              onClick={(e) => {
+                e.preventDefault();
+                setPromptType(card.promptType);
+              }}
+              key={card.title}
+              icon={card.icon}
+              title={card.title}
+              description={card.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

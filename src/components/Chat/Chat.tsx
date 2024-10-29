@@ -1,29 +1,44 @@
 import { twMerge } from "tailwind-merge";
-import chatData, { ChatMessage } from "./chatData";
+import { ChatMessage } from "./chatData";
 import { useState } from "react";
 import DefaultChat from "./DefaultChat";
+import { useOpenAI } from "@/utils/useOpenAi";
 
-// function Chat() {
-//   return (
-//     <div>
-//       Chat
-//       <Messages messages={chatData} />
-//       <div className="flex bottom-0 st w-full bg-amber-500 p-4">
-// <input className="w-full max-w-[598px] bg-gray-100" type="text" />
-// <button className="bg-gray-100 px-4 py-2 rounded-md">Submit</button>
-//       </div>
-//     </div>
-//   );
-// }
+import { v4 as uuidv4 } from "uuid";
 
 function Chat() {
   const [promptType, setPromptType] = useState<string | null>(null);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const openai = useOpenAI();
 
   function handleSetPromptType(promptType: string) {
     setPromptType(promptType);
   }
+
+  async function handleSubmit(inputValue: string) {
+    const newInputChatMessage: ChatMessage = {
+      id: uuidv4(),
+      role: "user",
+      content: inputValue,
+    };
+    const newChatMessages: ChatMessage[] = [
+      ...chatMessages,
+      newInputChatMessage,
+    ];
+    setChatMessages(newChatMessages);
+    const response = await openai.createChatCompletion(newChatMessages);
+    const responseMessage = response.choices.map((choice) => ({
+      content: choice.message.content,
+      role: choice.message.role,
+      id: response.id,
+    }))[0] as ChatMessage;
+
+    setChatMessages([...newChatMessages, responseMessage]);
+    console.log("createChatCompletion response: ", response);
+  }
+
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen w-full max-w-[598px] flex flex-col">
       <div
         className="flex-1 overflow-y-auto pb-[68px]"
         style={{
@@ -34,22 +49,36 @@ function Chat() {
         {promptType === null ? (
           <DefaultChat setPromptType={handleSetPromptType} />
         ) : (
-          <Messages messages={chatData} />
+          <Messages messages={chatMessages} />
         )}
       </div>
-      <ChatInput />
+      <ChatInput onSubmit={handleSubmit} />
     </div>
   );
 }
-function ChatInput() {
+
+interface ChatInputProps {
+  onSubmit: (inputVal: string) => void;
+}
+function ChatInput({ onSubmit }: ChatInputProps) {
+  const [inputVal, setInputVal] = useState("");
   return (
-    <div className="sticky flex items-center gap-4 mb-8">
+    <div className="flex gap-4">
       <input
-        className="w-full max-w-[598px] bg-gray-100 py-2 px-4 border-2 rounded-md"
+        value={inputVal}
+        onChange={(e) => {
+          setInputVal(e.currentTarget.value);
+        }}
+        className="w-full bg-gray-100 py-2 px-4 border-2 rounded-md"
         type="text"
         placeholder="Ask me anything..."
       />
-      <button className="bg-gray-100 px-4 py-2 rounded-md border-2 rounded-m">
+      <button
+        onClick={() => {
+          onSubmit(inputVal);
+        }}
+        className="bg-gray-100 px-4 py-2 rounded-md border-2 rounded-m"
+      >
         Submit
       </button>
     </div>
