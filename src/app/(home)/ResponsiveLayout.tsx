@@ -1,8 +1,7 @@
 "use client";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 import useScreenSize from "@/utils/useScreenSize";
-import { twMerge } from "tailwind-merge";
 import DesktopLayout from "./DesktopLayout";
 import MobileLayout from "./MobileLayout";
 

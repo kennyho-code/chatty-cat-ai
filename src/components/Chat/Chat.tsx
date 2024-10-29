@@ -5,7 +5,6 @@ import DefaultChat from "./DefaultChat";
 import { useOpenAI } from "@/utils/useOpenAi";
 
 import { v4 as uuidv4 } from "uuid";
-import sampleMessages from "./sameMessages";
 
 function Chat() {
   const [promptType, setPromptType] = useState<string | null>(null);
