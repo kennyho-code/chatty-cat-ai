@@ -5,12 +5,26 @@ import DefaultChat from "./DefaultChat";
 import { useOpenAI } from "@/utils/useOpenAi";
 
 import { v4 as uuidv4 } from "uuid";
+import { useConversations } from "@/utils/useConversation";
+import { useParams } from "next/navigation";
 
-function Chat() {
-  const [promptType, setPromptType] = useState<string | null>(null);
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+interface ChatProps {
+  defaultMessages?: ChatMessage[];
+  defaultPromptType?: string;
+  chatId?: string;
+}
+
+function Chat({ defaultMessages, defaultPromptType, chatId }: ChatProps) {
+  const [promptType, setPromptType] = useState<string | null>(
+    defaultPromptType || null,
+  );
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>(
+    defaultMessages || [],
+  );
   const openai = useOpenAI();
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const params = useParams();
+  const { addMessage } = useConversations();
 
   function handleSetPromptType(promptType: string) {
     setPromptType(promptType);
@@ -28,6 +42,7 @@ function Chat() {
       role: "user",
       content: inputValue,
     };
+    addMessage(chatId as string, newInputChatMessage);
     const newChatMessages: ChatMessage[] = [
       ...chatMessages,
       newInputChatMessage,
@@ -40,6 +55,7 @@ function Chat() {
       id: response.id,
     }))[0] as ChatMessage;
 
+    addMessage(chatId as string, responseMessage);
     setChatMessages([...newChatMessages, responseMessage]);
   }
 
