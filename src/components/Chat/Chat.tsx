@@ -10,7 +10,7 @@ function Chat() {
   const [promptType, setPromptType] = useState<string | null>(null);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const openai = useOpenAI();
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   function handleSetPromptType(promptType: string) {
     setPromptType(promptType);
