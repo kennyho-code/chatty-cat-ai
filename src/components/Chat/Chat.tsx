@@ -5,6 +5,7 @@ import DefaultChat from "./DefaultChat";
 import { useOpenAI } from "@/utils/useOpenAi";
 
 import { v4 as uuidv4 } from "uuid";
+import sampleMessages from "./sameMessages";
 
 function Chat() {
   const [promptType, setPromptType] = useState<string | null>(null);
@@ -52,6 +53,7 @@ function Chat() {
           <Messages messages={chatMessages} />
         )}
       </div>
+
       <ChatInput onSubmit={handleSubmit} />
     </div>
   );
@@ -62,8 +64,19 @@ interface ChatInputProps {
 }
 function ChatInput({ onSubmit }: ChatInputProps) {
   const [inputVal, setInputVal] = useState("");
+
+  const handleSubmit = () => {
+    onSubmit(inputVal);
+    setInputVal("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
   return (
-    <div className="flex gap-4">
+    <div className="sticky bottom-0 flex gap-4 p-4">
       <input
         value={inputVal}
         onChange={(e) => {
@@ -72,11 +85,11 @@ function ChatInput({ onSubmit }: ChatInputProps) {
         className="w-full bg-gray-100 py-2 px-4 border-2 rounded-md"
         type="text"
         placeholder="Ask me anything..."
+        onKeyDown={handleKeyDown}
       />
       <button
-        onClick={() => {
-          onSubmit(inputVal);
-        }}
+        type="submit"
+        onClick={handleSubmit}
         className="bg-gray-100 px-4 py-2 rounded-md border-2 rounded-m"
       >
         Submit
@@ -90,7 +103,7 @@ interface MessageProps {
 }
 function Messages({ messages }: MessageProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="h-screen flex flex-col gap-4 ">
       {messages.map((message) => {
         return (
           <div
