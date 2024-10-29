@@ -1,11 +1,12 @@
 import { twMerge } from "tailwind-merge";
-import { ChatMessage } from "./chatData";
+
 import { useEffect, useRef, useState } from "react";
 import DefaultChat from "./DefaultChat";
 import { useOpenAI } from "@/utils/useOpenAi";
 
 import { v4 as uuidv4 } from "uuid";
 import { useConversations } from "@/utils/useConversation";
+import { ChatMessage } from "./types";
 
 interface ChatProps {
   defaultMessages?: ChatMessage[];
