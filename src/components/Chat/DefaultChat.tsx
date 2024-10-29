@@ -4,7 +4,7 @@ function DefaultChat({
   setPromptType: (promptType: string) => void;
 }) {
   return (
-    <div className="h-screen mt-48 flex flex-1">
+    <div className="h-screen lg:mt-48 flex flex-1">
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-semibold text-gray-600">
           <span className="text-black">Hey, I’m Chat AI.</span> Your AI

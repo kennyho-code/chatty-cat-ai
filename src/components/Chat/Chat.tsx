@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { ChatMessage } from "./chatData";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DefaultChat from "./DefaultChat";
 import { useOpenAI } from "@/utils/useOpenAi";
 
@@ -11,10 +11,17 @@ function Chat() {
   const [promptType, setPromptType] = useState<string | null>(null);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const openai = useOpenAI();
+  const containerRef = useRef(null);
 
   function handleSetPromptType(promptType: string) {
     setPromptType(promptType);
   }
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [chatMessages]);
 
   async function handleSubmit(inputValue: string) {
     const newInputChatMessage: ChatMessage = {
@@ -35,13 +42,13 @@ function Chat() {
     }))[0] as ChatMessage;
 
     setChatMessages([...newChatMessages, responseMessage]);
-    console.log("createChatCompletion response: ", response);
   }
 
   return (
-    <div className="h-screen w-full max-w-[598px] flex flex-col">
+    <div className="w-full h-full max-w-[598px] flex flex-col">
       <div
         className="flex-1 overflow-y-auto pb-[68px]"
+        ref={containerRef}
         style={{
           msOverflowStyle: "none", // IE and Edge
           scrollbarWidth: "none", // Firefox
@@ -103,7 +110,7 @@ interface MessageProps {
 }
 function Messages({ messages }: MessageProps) {
   return (
-    <div className="h-screen flex flex-col gap-4 ">
+    <div className="flex flex-col gap-4 ">
       {messages.map((message) => {
         return (
           <div
