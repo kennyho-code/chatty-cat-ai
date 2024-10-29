@@ -6,7 +6,6 @@ import { useOpenAI } from "@/utils/useOpenAi";
 
 import { v4 as uuidv4 } from "uuid";
 import { useConversations } from "@/utils/useConversation";
-import { useParams } from "next/navigation";
 
 interface ChatProps {
   defaultMessages?: ChatMessage[];
@@ -23,12 +22,21 @@ function Chat({ defaultMessages, defaultPromptType, chatId }: ChatProps) {
   );
   const openai = useOpenAI();
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const params = useParams();
-  const { addMessage } = useConversations();
+  const { addMessage, conversations } = useConversations();
 
   function handleSetPromptType(promptType: string) {
     setPromptType(promptType);
   }
+
+  useEffect(() => {
+    const existingConversation = conversations.filter(
+      (conversation) => conversation.id === chatId,
+    )[0];
+
+    if (existingConversation) {
+      setChatMessages(existingConversation.messages);
+    }
+  }, [chatId, conversations]);
 
   useEffect(() => {
     if (containerRef.current) {

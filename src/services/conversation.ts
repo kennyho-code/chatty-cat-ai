@@ -14,6 +14,32 @@ export interface Conversation {
   updatedAt: number;
 }
 
+// This implementation is preobably not great...
+//
+// CHAT service always has to look for the window...beacuse it's being used in the nextjs server first.....
+// .... it's probably better to load it in the client using a Context first' like so
+//
+/*
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <StorageProvider>
+          {children}
+        </StorageProvider>
+      </body>
+    </html>
+  );
+}
+*/
+//
+//
+//
+
 // chatStorageService.ts
 export class ChatStorageService {
   private readonly STORAGE_KEY = "chat_conversations";
